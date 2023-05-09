@@ -43,56 +43,6 @@ class JwtHelper {
             }
         });
     }
-    getAccessFromRefreshToken(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const requestBody = request.body;
-                const refreshToken = requestBody.refreshToken;
-                if (!refreshToken) {
-                    throw "The refresh token is missing!";
-                }
-                jsonwebtoken_1.default.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => __awaiter(this, void 0, void 0, function* () {
-                    if (err) {
-                        response.status(http_status_1.default.UNAUTHORIZED).send("The user is unauthorized!");
-                    }
-                    else {
-                        const accessToken = yield this.signAccessToken(payload.aud.toString(), payload.role);
-                        response.status(http_status_1.default.OK).send({
-                            accessToken: accessToken,
-                            refreshToken: refreshToken,
-                            role: payload.role
-                        });
-                    }
-                }));
-            }
-            catch (err) {
-                console.log(err);
-                response.status(http_status_1.default.UNAUTHORIZED).send("The user could not be authorized!");
-            }
-        });
-    }
-    signAccessToken(phoneNumber, role) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve, reject) => {
-                const payload = {
-                    role: role
-                };
-                const secret = process.env.ACCESS_TOKEN_SECRET;
-                const options = {
-                    expiresIn: "10m",
-                    issuer: "tc2-data-service",
-                    audience: phoneNumber
-                };
-                return jsonwebtoken_1.default.sign(payload, secret, options, (err, token) => {
-                    if (err) {
-                        console.log(err);
-                        reject("Internal server error " + err.toString());
-                    }
-                    resolve(token);
-                });
-            });
-        });
-    }
 }
 exports.default = JwtHelper;
 //# sourceMappingURL=jwt-helper.js.map

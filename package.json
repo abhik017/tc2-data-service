@@ -1,5 +1,5 @@
 {
-  "name": "tc2-data-service",
+  "name": "@abhik017/tc2-data-service",
   "version": "1.0.0",
   "description": "This service handles all the data for the tc2",
   "main": "index.js",
