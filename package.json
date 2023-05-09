@@ -1,0 +1,29 @@
+{
+  "name": "tc2-data-service",
+  "version": "1.0.0",
+  "description": "This service handles all the data for the tc2",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/abhik017"
+  },
+  "scripts": {
+    "start": "npm run build && node dist/src/index.js",
+    "tslint-src": "tslint -c tslint.json -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
+    "dev": "npm run tslint-src && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhik Mehta",
+  "license": "ISC",
+  "dependencies": {
+    "@abhik017/tc2-express-server": "^1.1.12",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-status": "^1.6.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^9.0.0"
+  }
+}
